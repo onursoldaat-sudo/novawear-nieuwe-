@@ -132,3 +132,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+/* ======================================
+   SCROLL FADE-IN OBSERVER
+   ====================================== */
+
+const fadeElements = document.querySelectorAll(".fade-in, .fade-in-text");
+
+const fadeObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.15
+  }
+);
+
+fadeElements.forEach((el) => fadeObserver.observe(el));
